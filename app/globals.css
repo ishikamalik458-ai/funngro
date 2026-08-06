@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  @apply bg-surface text-ink font-body antialiased transition-colors duration-300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.dark body {
+  @apply bg-dark-bg text-primary-50;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display text-ink;
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  @apply text-primary-50;
+}
+
+::selection {
+  background-color: #BBF7D0;
+  color: #14532D;
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid #16A34A;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Slim, brand-tinted scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #F0FDF4;
+}
+::-webkit-scrollbar-thumb {
+  background: #86EFAC;
+  border-radius: 999px;
+  border: 2px solid #F0FDF4;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #22C55E;
+}
+
+@layer components {
+  /* Section eyebrow label */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-pill bg-primary-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary-800;
+  }
+
+  /* Section heading rhythm */
+  .section-pad {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .card-surface {
+    @apply rounded-3xl border border-primary-100 bg-white shadow-card transition-all duration-300 ease-out-quart;
+  }
+
+  .card-surface:hover {
+    @apply -translate-y-1.5 shadow-lift border-primary-200;
+  }
+
+  .dark .card-surface {
+    @apply border-dark-border bg-dark-card;
+  }
+
+  .dark .card-surface:hover {
+    @apply border-primary-700;
+  }
+
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+  }
+
+  .dark .glass-nav {
+    background: rgba(11, 23, 18, 0.72);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #15803D 0%, #16A34A 45%, #4ADE80 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+}
