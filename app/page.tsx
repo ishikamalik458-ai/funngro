@@ -38,7 +38,7 @@ export default function HomePage() {
         description="Join thousands of students gaining experience through real, paid projects with real companies."
         primaryLabel="Join Now"
         primaryHref="/for-teens"
-        secondaryLabel="Learn More"
+        secondaryLabel="Learn About Funngro"
         secondaryHref="/about"
       />
     </>
