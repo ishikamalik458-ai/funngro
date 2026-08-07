@@ -4,7 +4,6 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { BackToTop } from "@/components/layout/back-to-top";
-import { LoadingScreen } from "@/components/layout/loading-screen";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -114,7 +113,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider>
-          <LoadingScreen />
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-primary-700 focus:px-5 focus:py-3 focus:text-white"

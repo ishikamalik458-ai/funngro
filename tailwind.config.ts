@@ -96,9 +96,14 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-22px)" },
         },
-        blob: {
-          "0%, 100%": { borderRadius: "42% 58% 65% 35% / 45% 45% 55% 55%" },
-          "50%": { borderRadius: "60% 40% 35% 65% / 55% 60% 40% 45%" },
+        blobDrift: {
+          // Was previously animating `border-radius` (forces paint every
+          // frame — Lighthouse "non-composited animations"). Now only
+          // animates transform (scale + rotate), which the browser can run
+          // entirely on the compositor thread. The organic shape itself is
+          // now a fixed inline style on the element instead of animated.
+          "0%, 100%": { transform: "scale(1) rotate(0deg)" },
+          "50%": { transform: "scale(1.08) rotate(4deg)" },
         },
         marquee: {
           "0%": { transform: "translateX(0)" },
@@ -108,18 +113,13 @@ const config: Config = {
           "0%": { transform: "scale(0)", opacity: "0.45" },
           "100%": { transform: "scale(2.4)", opacity: "0" },
         },
-        dash: {
-          "0%": { strokeDashoffset: "1000" },
-          "100%": { strokeDashoffset: "0" },
-        },
       },
       animation: {
         float: "float 6s ease-in-out infinite",
         "float-slow": "floatSlow 9s ease-in-out infinite",
-        blob: "blob 12s ease-in-out infinite",
+        "blob-drift": "blobDrift 12s ease-in-out infinite",
         marquee: "marquee 32s linear infinite",
         ripple: "ripple 900ms ease-out forwards",
-        dash: "dash 1.4s ease-out forwards",
       },
       transitionTimingFunction: {
         "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)",

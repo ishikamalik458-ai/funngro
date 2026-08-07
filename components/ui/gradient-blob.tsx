@@ -17,10 +17,15 @@ export function GradientBlob({
     <div
       aria-hidden
       className={cn(
-        "pointer-events-none absolute animate-blob opacity-30 blur-3xl",
+        "pointer-events-none absolute animate-blob-drift opacity-30 blur-3xl",
         gradients[variant],
         className
       )}
+      // Fixed organic shape (was previously animated via border-radius, which
+      // is a non-composited/paint-triggering property). The shape now stays
+      // static while animate-blob-drift handles motion via transform only,
+      // so the browser can run it on the compositor thread.
+      style={{ borderRadius: "42% 58% 65% 35% / 45% 45% 55% 55%" }}
     />
   );
 }

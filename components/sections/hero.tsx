@@ -18,9 +18,13 @@ export function Hero() {
 
       <div className="container grid items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
+          {/* Above-the-fold text: no opacity fade (was gating LCP paint behind
+              JS hydration). Kept a small transform-only settle so the section
+              doesn't feel static, but transform never blocks paint like
+              opacity:0 does. */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 16 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.6 }}
           >
             <Eyebrow icon={<Star className="h-3.5 w-3.5" />}>
@@ -29,8 +33,8 @@ export function Hero() {
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 24 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.65, delay: 0.1 }}
             className="mt-6 text-[2.6rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-6xl lg:text-[3.6rem] dark:text-primary-50"
           >
@@ -42,8 +46,8 @@ export function Hero() {
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 24 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.65, delay: 0.2 }}
             className="mt-6 max-w-xl text-lg leading-relaxed text-body"
           >
@@ -52,8 +56,8 @@ export function Hero() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 24 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.65, delay: 0.3 }}
             className="mt-9 flex flex-col gap-4 sm:flex-row"
           >
@@ -134,10 +138,11 @@ export function Hero() {
 
               <div className="mt-6 h-2 w-full overflow-hidden rounded-pill bg-primary-100">
                 <motion.div
-                  initial={{ width: "0%" }}
-                  animate={{ width: "70%" }}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 0.7 }}
                   transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
-                  className="h-full rounded-pill bg-grad-brand"
+                  style={{ transformOrigin: "left" }}
+                  className="h-full w-full rounded-pill bg-grad-brand"
                 />
               </div>
             </div>

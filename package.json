@@ -34,5 +34,14 @@
   },
   "engines": {
     "node": ">=20.9.0"
-  }
+  },
+  "browserslist": [
+    "chrome >= 107",
+    "edge >= 107",
+    "firefox >= 104",
+    "safari >= 16",
+    "ios_saf >= 16",
+    "not IE 11",
+    "not dead"
+  ]
 }
