@@ -2,7 +2,7 @@
 
 A production-ready marketing site for **Funngro**, the platform that connects teenagers
 with real companies for paid projects, skill-building, and portfolio growth. Built with
-Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS, and Framer Motion.
+Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS, and Framer Motion.
 
 ## Getting started
 
@@ -12,6 +12,11 @@ npm run dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000).
+
+> **No `package-lock.json` is committed.** `npm install` will generate one on first
+> install (locally or on Vercel) with real, verifiable registry checksums. Commit the
+> generated file after your first `npm install` for reproducible builds — see
+> [Dependency notes](#dependency-notes) below for why it isn't pre-generated here.
 
 Other scripts:
 
@@ -104,3 +109,34 @@ persisted to `localStorage`.
 3. Wire the contact form and newsletter form in `app/contact/page.tsx` /
    `components/layout/footer.tsx` to a real submission endpoint.
 4. Swap placeholder contact details in `app/contact/page.tsx`.
+
+## Dependency notes
+
+Last updated for the Next.js 15 → 16 upgrade (August 2026):
+
+- **Next.js 16.3.0 / React 19.2.8** — React versions 19.0–19.2.0 are affected by
+  [CVE-2025-55182](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)
+  (CVSS 10.0 RCE in React Server Components, patched in 19.0.1 / 19.1.2 / 19.2.1+).
+  This is almost certainly the vulnerability a host's security scan is flagging on
+  older lockfiles — 19.2.8 is well past the fix.
+- **`data-scroll-behavior="smooth"` on `<html>`** (`app/layout.tsx`) — Next.js 16 stopped
+  auto-managing scroll behavior on route transitions; this attribute keeps navigation
+  scrolling working exactly as it did on 15.
+- **ESLint stays on 9.x (9.39.5), not 10.x** — `eslint-config-next` still bundles
+  sub-plugins (`eslint-plugin-react`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`)
+  that cap their peer dependency at `eslint@^9`
+  ([vercel/next.js#91702](https://github.com/vercel/next.js/issues/91702), open as of
+  this writing). Installing ESLint 10 here would throw `ERESOLVE` on `npm install`.
+  Revisit once that issue closes.
+- **lucide-react stays on 0.553.0, not 1.x** — Lucide's 1.0 release removed trademarked
+  brand icons and renamed several others. This project's footer uses the `Instagram`,
+  `Linkedin`, and `Facebook` icons directly, which are exactly the icons v1 dropped;
+  upgrading would break the footer. Migrating to brand SVGs + `lucide-react@1` is a
+  separate, deliberate task if wanted later.
+- **framer-motion → `^13.0.0`** — the library was renamed to "Motion" upstream
+  (`motion/react`), but the `framer-motion` package name is still published and
+  functionally equivalent, so no import changes were needed here.
+- **No `package-lock.json` is committed.** Generating one requires real npm registry
+  checksums that can only be produced by actually running `npm install` against the
+  registry — run it once locally (or let Vercel's first install generate it) and commit
+  the result for reproducible builds.
